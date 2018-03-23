@@ -1,0 +1,11 @@
+{
+  "name": "blackwidow-bot",
+  "version": "1.0.0",
+  "description": "BlackWidow Discord bot",
+  "main": "bot.js",
+  "author": "Esskimo",
+  "dependencies": {
+    "discord.io": "github:woor/discord.io#gateway_v6",
+    "winston": "^2.4.1"
+  }
+}
