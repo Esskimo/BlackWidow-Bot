@@ -1,44 +1,63 @@
-var Discord = require('./node_modules/discord.io');
-var logger = require('./node_modules/winston');
-var auth = require('./auth.json');
-// Configure logger settings
+const fs = require('fs');
+const Discord = require("discord.js");
+const logger = require('./node_modules/winston');
+const { prefix, token } = require('./config.json');
+
+const bot = new Discord.Client();
+bot.commands = new Discord.Collection();
+
+const commandFiles = fs.readdirSync('./commands');
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	bot.commands.set(command.name, command);
+}
+
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
     colorize: true
 });
-logger.level = 'debug';
-// Initialize Discord Bot
-var bot = new Discord.Client({
-    token: auth.token,
-    autorun: true
-});
-bot.on('ready', function (evt) {
-    logger.info('Connected');
-    logger.info('Logged in as: ');
-    logger.info(bot.username + ' - (Bot ID: ' + bot.id + ')');
-    bot.user.setStatus("dnd");
-    bot.user.setGame("Nevíš si rady? /help");
+
+bot.on('ready', () => {
+  logger.info(`Logged in as ${bot.user.tag}!`);
+  logger.info('Successfully connected !');
+  bot.user.setActivity("BlackWidow.cz");
+  //console.log(bot.channels);
+
+  //var ch = bot.channels.get('426180839831764995');
+  var ch = bot.channels.get('426532691119177738');
+  ch.send("```❤️ Hello everyone! I'm alive once again! ❤️```");
 });
 
-bot.on('message', function (user, userID, channelID, message, evt) {
-    if (message.substring(0, 1) == '!') {
-        var lwr = message.toLowerCase();
-        var args = lwr.substring(1).split(' ');
-        var cmd = args[0];
+bot.on('message', message => {
+  const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
+  
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-        args = args.splice(1);
-        switch(cmd) {
-            case 'ping':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'Pong!'
-                });
-            case 'help':
-                bot.sendMessage({
+  if(!message.member.roles.some(r=>["Owner", "Admin"].includes(r.name)) ) {
+    logger.error("[" + message.author.tag + "] just tried to execute the <" + command + "> command. Args = {" + args + "} !");
+    logger.error("But he doesn't have administrator rights !");
+    return;
+  }
 
-                });
-            break;
-            // Just add any case commands if you want to..
-         }
-     }
+	if (!bot.commands.has(command)) return;
+
+  if(command === 'shutdown') {
+    message.channel.send("```⚠️ Goodbye everyone! I'm shutting down ! ⚠️```");
+    bot.destroy()
+    logger.info("[" + message.author.tag + '] just shut down the bot!');
+    return;
+  }
+
+	try {
+		bot.commands.get(command).execute(message, args);
+    logger.warn("["+message.author.tag + "] just executed the <" + command + "> command. Args = {" + args + "} !");
+	}
+	catch (error) {
+		console.error(error);
+		message.reply('there was an error trying to execute that command! ⚠️');
+	}
 });
+
+bot.login(token);
