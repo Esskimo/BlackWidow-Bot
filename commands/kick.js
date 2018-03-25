@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'kick',
-	description: 'Tag a member and kick them (but not really).',
+	description: 'Tag a member and kick them.',
 	execute(message, args) {
 		let member = message.mentions.members.first();
   	let reason = args.slice(1).join(" ");
@@ -13,7 +13,9 @@ module.exports = {
 			return message.reply("you didn't specify a reason for the kick !");
 		}
 
-		message.channel.send('Member: ' + member + " Reason: " + reason);
-		//member.kick(reason);
+		member.kick(reason).then(() => message.channel.send(`Kicked ${member.displayName}. Reason = {` + reason + "}")).catch(err => {
+			console.error(err);
+			message.channel.send('there was an error when trying to kick [' + member + "]. Reason = {" + reason + "} ! ⚠️");
+		});
 	},
 };

@@ -32,8 +32,13 @@ bot.on('ready', () => {
 bot.on('message', message => {
   const args = message.content.slice(prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
-  
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  if(message.channel.type == "dm" || message.channel.type == "group") {
+    message.author.send("```😖I'm really sorry, but I don't like talking in private like this.😖\n\n😍Let's chat normally in the BlackWidow channel instead!😍```");
+    return;
+  }
+
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   if(!message.member.roles.some(r=>["Owner", "Admin"].includes(r.name)) ) {
     logger.error("[" + message.author.tag + "] just tried to execute the <" + command + "> command. Args = {" + args + "} !");
