@@ -9,8 +9,8 @@ bot.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands');
 
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	bot.commands.set(command.name, command);
+  const command = require(`./commands/${file}`);
+  bot.commands.set(command.name, command);
 }
 
 logger.remove(logger.transports.Console);
@@ -31,7 +31,7 @@ bot.on('ready', () => {
 
 bot.on('message', message => {
   const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
+  const command = args.shift().toLowerCase();
 
   if(message.channel.type == "dm" || message.channel.type == "group") {
     message.author.send("```😖I'm really sorry, but I don't like talking in private like this.😖\n\n😍Let's chat normally in the BlackWidow channel instead!😍```");
