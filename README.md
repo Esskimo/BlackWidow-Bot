@@ -1,6 +1,6 @@
 # BlackWidow-Bot
 
-[![license](https://img.shields.io/github/license/Esskimo/BlackWidow-bot.svg?style=flat-square)](https://github.com/Esskimo/BlackWidow-Bot/blob/master/LICENSE.md) [![Travis](https://img.shields.io/travis/Esskimo/BlackWidow-bot.svg?style=flat-square)](https://travis-ci.org/Esskimo/BlackWidow-Bot) [![NodeV](https://img.shields.io/badge/Node-v8.5.0-FF0000.svg?style=flat-square)](https://nodejs.org/en/download/current/)
+[![license](https://img.shields.io/github/license/Esskimo/BlackWidow-bot.svg?style=flat-square)](https://github.com/Esskimo/BlackWidow-Bot/blob/master/LICENSE.md) [![Travis](https://travis-ci.org/Esskimo/BlackWidow-Bot.svg?branch=master)](https://travis-ci.org/Esskimo/BlackWidow-Bot) [![NodeV](https://img.shields.io/badge/Node-v8.5.0-FF0000.svg?style=flat-square)](https://nodejs.org/en/download/current/)
 
 
 **BlackWidow is a Discord-Bot for the BlackWidow server for mostly administrative purposes.**
