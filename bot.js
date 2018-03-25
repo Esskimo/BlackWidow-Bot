@@ -58,11 +58,11 @@ bot.on('message', message => {
   try {
     bot.commands.get(command).execute(message, args);
     logger.warn("["+message.author.tag + "] just executed the <" + command + "> command. Args = {" + args + "} !");
-	}
-	catch (error) {
-		console.error(error);
-		message.reply('there was an error trying to execute that command! ⚠️');
-	}
+  }
+  catch (error) {
+    console.error(error);
+    message.reply('there was an error trying to execute that command! ⚠️');
+  }
 });
 
 bot.login(token);
