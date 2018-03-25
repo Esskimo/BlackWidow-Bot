@@ -15,7 +15,7 @@ for (const file of commandFiles) {
 
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
-    colorize: true
+  colorize: true
 });
 
 bot.on('ready', () => {
@@ -26,7 +26,7 @@ bot.on('ready', () => {
 
   //var ch = bot.channels.get('426180839831764995');
   var ch = bot.channels.get('426532691119177738');
-  ch.send("```❤️ Hello everyone! I'm alive once again! ❤️```");
+  ch.send("```❤️ Hello everyone! I'm awake once again! ❤️```");
 });
 
 bot.on('message', message => {
@@ -49,7 +49,7 @@ bot.on('message', message => {
   if (!bot.commands.has(command)) return;
 
   if(command === 'shutdown') {
-    message.channel.send("```⚠️ Goodbye everyone! I'm shutting down ! ⚠️```");
+    message.channel.send("```😴 Goodbye everyone! I'm shutting down ! 😴```");
     bot.destroy()
     logger.info("[" + message.author.tag + '] just shut down the bot!');
     return;
