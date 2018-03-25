@@ -4,6 +4,10 @@ module.exports = {
 	execute(message, args) {
 		const amount = parseInt(args[0]) + 1;
 
+		if(!amount) {
+			return message.reply("you need to specify number of messages to be deleted (1-99).");
+		}
+
 		if (isNaN(amount)) {
 			return message.reply('that doesn\'t seem to be a valid number.');
 		}
