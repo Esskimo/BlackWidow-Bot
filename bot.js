@@ -36,7 +36,9 @@ bot.on('message', message => {
   const command = args.shift().toLowerCase();
 
   if(message.channel.type == "dm" || message.channel.type == "group") {
-    message.author.send("```I'm really sorry, but I don't like talking in private like this.😖\n\nLet's chat normally in the BlackWidow channel instead!😍```");
+    message.author.send("```I'm really sorry, but I don't like talking in private like this.😖\n\nLet's chat normally in the BlackWidow channel instead!😍```").catch(function(err) {
+      if(err != "DiscordAPIError: Cannot send messages to this user") console.log(err);
+    });
     return;
   }
 

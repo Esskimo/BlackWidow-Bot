@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'ban',
-	description: 'Tag a member and ban them.',
+	description: 'Tag a member, specify a reason and ban them',
 	execute(message, args) {
 		let member = message.mentions.members.first();
     let reason = args.slice(2).join(" ");

@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'clear',
-	description: 'Clear up to 99 messages.',
+	description: 'Clears up to 99 messages in a channel',
 	execute(message, args) {
 		const amount = parseInt(args[0]) + 1;
 

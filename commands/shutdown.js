@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'shutdown',
-	description: 'Shutdown',
+	description: 'Shuts down entire bot - without restart',
 	execute(message) {
 		return;
 	},

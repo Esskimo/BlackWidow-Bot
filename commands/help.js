@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = {
   name: "help",
-  description: "lists all available commands",
+  description: "Displays this message with all commands",
 	execute(message) {
     fs.readdir("./commands", (err, files) => {
         if(err) console.error(err);
@@ -22,9 +22,7 @@ module.exports = {
           let props = require(`./${f}`);
           namelist = props.name;
           desclist = props.description;
-          help.push(```Command: ${namelist} \n\tDescription: ${desclist}\n\n```);
-
-          //message.author.send(`**${namelist}** \n${desclist}`);
+          help.push("```Command: !" + namelist + " \n\tDescription: " + desclist + "```");
         });
         message.author.send(help);
       });

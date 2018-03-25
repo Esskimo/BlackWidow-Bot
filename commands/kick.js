@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'kick',
-	description: 'Tag a member and kick them.',
+	description: 'Tag a member, specify a reason and kick them',
 	execute(message, args) {
 		let member = message.mentions.members.first();
   	let reason = args.slice(1).join(" ");
