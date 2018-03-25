@@ -16,14 +16,14 @@ module.exports = {
     if(args[1] == null) {
       return message.channel.send("You didn't specify time!");
     }
-    
-    if(args[2] == null || reason == null) {
+
+    if(reason == null) {
       return message.channel.send("You didn't specify a reason!");
     }
 
-    member.ban({ days: args[1], reason: args[2] }).then(() => message.channel.send(`Banned ${member.displayName} for <` + args[1] + "> days. Reason = {" + args[2] + "}")).catch(err => {
+    member.ban({ days: args[1], reason: reason }).then(() => message.channel.send(`Banned ${member.displayName} for <` + args[1] + "> days. Reason = {" + reason + "}")).catch(err => {
 			console.error(err);
-			message.channel.send('there was an error when trying to kick [' + member + "] for <" + args[1] + "> days . Reason = {" + args[2] + "} ! ⚠️");
+			message.channel.send('there was an error when trying to kick [' + member + "] for <" + args[1] + "> days . Reason = {" + reason + "} ! ⚠️");
 		});
 	},
 };

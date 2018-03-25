@@ -3,7 +3,9 @@ const Discord = require("discord.js");
 const logger = require('./node_modules/winston');
 const { prefix, token } = require('./config.json');
 
-const bot = new Discord.Client();
+const bot = new Discord.Client({
+  autoReconnect: true
+});
 bot.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands');
@@ -34,7 +36,7 @@ bot.on('message', message => {
   const command = args.shift().toLowerCase();
 
   if(message.channel.type == "dm" || message.channel.type == "group") {
-    message.author.send("```😖I'm really sorry, but I don't like talking in private like this.😖\n\n😍Let's chat normally in the BlackWidow channel instead!😍```");
+    message.author.send("```I'm really sorry, but I don't like talking in private like this.😖\n\nLet's chat normally in the BlackWidow channel instead!😍```");
     return;
   }
 
@@ -52,6 +54,13 @@ bot.on('message', message => {
     message.channel.send("```😴 Goodbye everyone! I'm shutting down ! 😴```");
     bot.destroy()
     logger.info("[" + message.author.tag + '] just shut down the bot!');
+    return;
+  }
+
+  if(command === 'reboot') {
+    message.channel.send("```⚠️ Beware everyone! I'm rebooting ! ⚠️```").then(msg => bot.destroy()).then(() => bot.login(token));
+    logger.info("[" + message.author.tag + '] just reloaded the entire bot!');
+    logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     return;
   }
 
