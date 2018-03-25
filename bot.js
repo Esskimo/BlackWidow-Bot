@@ -42,11 +42,11 @@ bot.on('message', message => {
 
   if(!message.member.roles.some(r=>["Owner", "Admin"].includes(r.name)) ) {
     logger.error("[" + message.author.tag + "] just tried to execute the <" + command + "> command. Args = {" + args + "} !");
-    logger.error("But he doesn't have administrator rights !");
+    logger.error("But doesn't have administrator rights!");
     return;
   }
 
-	if (!bot.commands.has(command)) return;
+  if (!bot.commands.has(command)) return;
 
   if(command === 'shutdown') {
     message.channel.send("```⚠️ Goodbye everyone! I'm shutting down ! ⚠️```");
@@ -55,8 +55,8 @@ bot.on('message', message => {
     return;
   }
 
-	try {
-		bot.commands.get(command).execute(message, args);
+  try {
+    bot.commands.get(command).execute(message, args);
     logger.warn("["+message.author.tag + "] just executed the <" + command + "> command. Args = {" + args + "} !");
 	}
 	catch (error) {
